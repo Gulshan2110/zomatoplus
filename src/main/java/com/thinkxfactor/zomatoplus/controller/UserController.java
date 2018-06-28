@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.thinkxfactor.zomatoplus.model.Login;
 import com.thinkxfactor.zomatoplus.model.User;
 import com.thinkxfactor.zomatoplus.repository.UserRepository;
 
@@ -27,6 +28,13 @@ public class UserController {
 	@PostMapping("/add")
 	public User addUser(@RequestBody User user) {
 		return userRepository.save(user);
+	}
+	
+	@PostMapping("/login")
+	public User LoginUser(@RequestBody Login login)
+	{
+		User user=userRepository.findByNameAndPassword(login.getName(),login.getPassword());
+		return user;
 	}
 
 }
